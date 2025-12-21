@@ -8,7 +8,8 @@ import Home from "./website/pages/Home";
 import About from "./website/pages/About";
 import Menu from "./website/pages/Menu";
 import Contact from "./website/pages/Contact";
-import Sidebar_Panel from "./admin_panel/pages/Sidebar_Panel";
+import SidebarPanel from "./admin_panel/pages/SidebarPanel";
+import MenuFoods from "./admin_panel/pages/MenuFood";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,8 +22,12 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/admin_panel",
-    element: <Sidebar_Panel />,
+    path: "/admin",
+    element: <SidebarPanel />,
+  },
+  {
+    path: "/admin/menu",
+    element: <MenuFoods />,
   },
 ]);
 createRoot(document.getElementById("root")).render(
