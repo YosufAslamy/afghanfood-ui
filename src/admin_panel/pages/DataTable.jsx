@@ -89,7 +89,7 @@ const foods = [
     category_id: 1,
     name: "Kabuli Pulao",
     description: "A traditional Afghan rice dish with lamb and raisins.",
-    price: 12.0,
+    price: "$12",
     is_vegetarian: false,
   },
 ];
@@ -100,11 +100,12 @@ export function FoodTable() {
       <TableHeader>
         <TableRow>
           <TableHead>ID</TableHead>
+          <TableHead>Category Id</TableHead>
           <TableHead>Name</TableHead>
-          <TableHead>Category Name</TableHead>
-          <TableHead>Vegetarian</TableHead>
+          <TableHead>Describtion</TableHead>
           <TableHead>Price</TableHead>
-          <TableHead>Status</TableHead>
+          <TableHead>Photo Url</TableHead>
+          <TableHead>Vegetarian</TableHead>
 
           <TableCell className="text-right">
             <DropdownMenu>
