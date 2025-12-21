@@ -35,7 +35,7 @@ const data = [
   },
 ];
 
-export default function DataTable() {
+export default function DataTables() {
   return (
     <Table>
       <TableHeader>
@@ -75,6 +75,65 @@ export default function DataTable() {
             <TableCell>{row.vegetarian}</TableCell>
             <TableCell>{row.price}</TableCell>
             <TableCell>{row.status}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}
+
+// List Of Foods On Menu Page!!!
+const foods = [
+  {
+    id: 1,
+    category_id: 1,
+    name: "Kabuli Pulao",
+    description: "A traditional Afghan rice dish with lamb and raisins.",
+    price: 12.0,
+    is_vegetarian: false,
+  },
+];
+
+export function FoodTable() {
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>ID</TableHead>
+          <TableHead>Name</TableHead>
+          <TableHead>Category Name</TableHead>
+          <TableHead>Vegetarian</TableHead>
+          <TableHead>Price</TableHead>
+          <TableHead>Status</TableHead>
+
+          <TableCell className="text-right">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                  <MoreHorizontal />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Add</DropdownMenuLabel>
+                <DropdownMenuItem>Update</DropdownMenuItem>
+                <DropdownMenuItem className="text-red-600">
+                  Delete
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </TableCell>
+        </TableRow>
+      </TableHeader>
+
+      <TableBody>
+        {foods.map((row) => (
+          <TableRow key={row.id}>
+            <TableCell>{row.id}</TableCell>
+            <TableCell>{row.category_id}</TableCell>
+            <TableCell>{row.name}</TableCell>
+            <TableCell>{row.description}</TableCell>
+            <TableCell>{row.price}</TableCell>
+            <TableCell>{row.is_vegetarian ? "Yes" : "No"}</TableCell>
           </TableRow>
         ))}
       </TableBody>
