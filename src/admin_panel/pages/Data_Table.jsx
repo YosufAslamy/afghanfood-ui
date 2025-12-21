@@ -46,6 +46,23 @@ export default function DataTable() {
           <TableHead>Vegetarian</TableHead>
           <TableHead>Price</TableHead>
           <TableHead>Status</TableHead>
+
+          <TableCell className="text-right">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                  <MoreHorizontal />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Add</DropdownMenuLabel>
+                <DropdownMenuItem>Update</DropdownMenuItem>
+                <DropdownMenuItem className="text-red-600">
+                  Delete
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </TableCell>
         </TableRow>
       </TableHeader>
 
@@ -58,23 +75,6 @@ export default function DataTable() {
             <TableCell>{row.vegetarian}</TableCell>
             <TableCell>{row.price}</TableCell>
             <TableCell>{row.status}</TableCell>
-
-            <TableCell className="text-right">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="h-8 w-8 p-0">
-                    <MoreHorizontal />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>Add</DropdownMenuLabel>
-                  <DropdownMenuItem>Update</DropdownMenuItem>
-                  <DropdownMenuItem className="text-red-600">
-                    Delete
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </TableCell>
           </TableRow>
         ))}
       </TableBody>
