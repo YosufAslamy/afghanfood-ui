@@ -10,6 +10,7 @@ import Menu from "./website/pages/Menu";
 import Contact from "./website/pages/Contact";
 import SidebarPanel from "./admin_panel/pages/SidebarPanel";
 import MenuFoods from "./admin_panel/pages/MenuFood";
+import MenuCategory from "./admin_panel/pages/MenuCategory";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/menu",
     element: <MenuFoods />,
+  },
+  {
+    path: "/admin/menu/category",
+    element: <MenuCategory />,
   },
 ]);
 createRoot(document.getElementById("root")).render(

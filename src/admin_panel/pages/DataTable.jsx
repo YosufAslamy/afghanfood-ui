@@ -1,4 +1,3 @@
-// components/data-table.tsx
 import {
   Table,
   TableBody,
@@ -126,6 +125,71 @@ export function FoodTable() {
             <TableCell>{row.photo_url}</TableCell>
             <TableCell>{row.is_vegetarian ? "Yes" : "No"}</TableCell>
             <TableCell>{row.is_active ? "Active" : "Inactive"}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}
+
+export function CategoryTable() {
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/menu")
+      .then((response) => {
+        const categoriesOnly = response.data.map((category) => ({
+          id: category.id,
+          name: category.name,
+          description: category.description || "No description",
+        }));
+        setCategories(categoriesOnly);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching categories:", error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <div>Loading categories...</div>;
+  }
+
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>id</TableHead>
+          <TableHead>name</TableHead>
+          <TableHead>descriptin</TableHead>
+          <TableHead className="text-right">Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+
+      <TableBody>
+        {categories.map((category) => (
+          <TableRow key={category.id}>
+            <TableCell>{category.id}</TableCell>
+            <TableCell>{category.name}</TableCell>
+            <TableCell>{category.description}</TableCell>
+            <TableCell className="text-right">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="h-8 w-8 p-0">
+                    <MoreHorizontal className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>Edit</DropdownMenuItem>
+                  <DropdownMenuItem className="text-red-600">
+                    Delete
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
