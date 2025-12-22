@@ -150,13 +150,8 @@ export function CategoryTable() {
       })
       .catch((error) => {
         console.error("Error fetching categories:", error);
-        setLoading(false);
       });
   }, []);
-
-  if (loading) {
-    return <div>Loading categories...</div>;
-  }
 
   return (
     <Table>
