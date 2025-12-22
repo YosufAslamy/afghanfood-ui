@@ -90,9 +90,19 @@ export function FoodTable() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/foods")
+      .get("http://localhost:8000/api/menu")
       .then((response) => {
-        setFoods(response.data);
+        const foodsData = response.data.map((food) => ({
+          id: food.id,
+          category_id: food.category_id,
+          name: food.name,
+          description: food.description || "No description",
+          price: food.price,
+          photo_url: food.photo_url || "No photo",
+          is_vegetarian: food.is_vegetarian,
+          is_active: food.is_active,
+        }));
+        setFoods(foodsData);
       })
       .catch((error) => {
         console.error("Error fetching foods:", error);
@@ -134,7 +144,6 @@ export function FoodTable() {
 
 export function CategoryTable() {
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -146,7 +155,6 @@ export function CategoryTable() {
           description: category.description || "No description",
         }));
         setCategories(categoriesOnly);
-        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching categories:", error);
