@@ -15,6 +15,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
+import { Plus } from "lucide-react";
+
 const data = [
   {
     id: 1,
@@ -45,20 +47,17 @@ export default function DataTables() {
           <TableHead>Vegetarian</TableHead>
           <TableHead>Price</TableHead>
           <TableHead>Status</TableHead>
-
           <TableCell className="text-right">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="h-8 w-8 p-0">
-                  <MoreHorizontal />
+                  <Plus />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Add</DropdownMenuLabel>
-                <DropdownMenuItem>Update</DropdownMenuItem>
-                <DropdownMenuItem className="text-red-600">
-                  Delete
-                </DropdownMenuItem>
+                <SidebarMenuButton>
+                  <DropdownMenuLabel>Add Item</DropdownMenuLabel>
+                </SidebarMenuButton>
               </DropdownMenuContent>
             </DropdownMenu>
           </TableCell>
@@ -74,6 +73,21 @@ export default function DataTables() {
             <TableCell>{row.vegetarian}</TableCell>
             <TableCell>{row.price}</TableCell>
             <TableCell>{row.status}</TableCell>
+            <TableCell className="text-right">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="h-8 w-8 p-0">
+                    <MoreHorizontal />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>Update</DropdownMenuItem>
+                  <DropdownMenuItem className="text-red-600">
+                    Delete
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
@@ -84,6 +98,7 @@ export default function DataTables() {
 // List Of Foods On Menu Page!!!
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { SidebarMenuButton } from "@/components/ui/sidebar";
 
 export function FoodTable() {
   const [foods, setFoods] = useState([]);
@@ -92,21 +107,22 @@ export function FoodTable() {
     axios
       .get("http://localhost:8000/api/menu")
       .then((response) => {
-        const foodsData = response.data.map((category) => ({
-          id: food.id,
-          category_id: food.category_id,
-          name: food.name,
-          description: food.description || "No description",
-          price: food.price,
-          photo_url: food.photo_url || "No photo",
-          is_vegetarian: food.is_vegetarian,
-          is_active: food.is_active,
-        }));
+        const foodsData = response.data.flatMap((category) =>
+          category.foods.map((food) => ({
+            id: food.id,
+            category_id: food.category_id,
+            name: food.name,
+            description: food.description || "No description",
+            price: food.price,
+            photo_url: food.photo_url || "No photo",
+            is_vegetarian: food.is_vegetarian,
+            is_active: food.is_active,
+          }))
+        );
+
         setFoods(foodsData);
       })
-      .catch((error) => {
-        console.error("Error fetching foods:", error);
-      });
+      .catch(console.error);
   }, []);
 
   return (
@@ -121,6 +137,20 @@ export function FoodTable() {
           <TableHead>Photo Url</TableHead>
           <TableHead>Vegetarian</TableHead>
           <TableHead>Active</TableHead>
+          <TableCell className="text-right">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                  <Plus />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <SidebarMenuButton>
+                  <DropdownMenuLabel>Add Item</DropdownMenuLabel>
+                </SidebarMenuButton>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </TableCell>
         </TableRow>
       </TableHeader>
 
@@ -135,13 +165,28 @@ export function FoodTable() {
             <TableCell>{row.photo_url}</TableCell>
             <TableCell>{row.is_vegetarian ? "Yes" : "No"}</TableCell>
             <TableCell>{row.is_active ? "Active" : "Inactive"}</TableCell>
+            <TableCell className="text-right">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="h-8 w-8 p-0">
+                    <MoreHorizontal />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>Update</DropdownMenuItem>
+                  <DropdownMenuItem className="text-red-600">
+                    Delete
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
     </Table>
   );
 }
-
+// List Of Categories On Menu Category Page!!! by Omar
 export function CategoryTable() {
   const [categories, setCategories] = useState([]);
 
@@ -168,7 +213,20 @@ export function CategoryTable() {
           <TableHead>id</TableHead>
           <TableHead>name</TableHead>
           <TableHead>descriptin</TableHead>
-          <TableHead className="text-right">Actions</TableHead>
+          <TableCell className="text-right">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                  <Plus />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <SidebarMenuButton>
+                  <DropdownMenuLabel>Add Item</DropdownMenuLabel>
+                </SidebarMenuButton>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </TableCell>
         </TableRow>
       </TableHeader>
 
@@ -186,7 +244,7 @@ export function CategoryTable() {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem>Edit</DropdownMenuItem>
+                  <DropdownMenuItem>Update</DropdownMenuItem>
                   <DropdownMenuItem className="text-red-600">
                     Delete
                   </DropdownMenuItem>
