@@ -1,4 +1,4 @@
-import { ChevronUp, Home, Menu, Plus } from "lucide-react";
+import { ChevronUp, Home, Layers, Menu, Plus } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -26,7 +26,8 @@ import { Link } from "react-router-dom";
 
 const items = [
   { title: "Home", url: "/admin", icon: Home },
-  { title: "Menu", url: "/admin/menu/category", icon: Menu },
+  { title: "Menu", url: "/admin/menu", icon: Menu },
+  { title: "Category", url: "/admin/menu/category", icon: Layers },
 ];
 
 export default function MenuCategory() {
