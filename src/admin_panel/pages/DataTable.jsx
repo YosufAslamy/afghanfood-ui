@@ -92,7 +92,7 @@ export function FoodTable() {
     axios
       .get("http://localhost:8000/api/menu")
       .then((response) => {
-        const foodsData = response.data.map((food) => ({
+        const foodsData = response.data.map((category) => ({
           id: food.id,
           category_id: food.category_id,
           name: food.name,
@@ -152,7 +152,7 @@ export function CategoryTable() {
         const categoriesOnly = response.data.map((category) => ({
           id: category.id,
           name: category.name,
-          description: category.description || "No description",
+          description: category.description || "empty",
         }));
         setCategories(categoriesOnly);
       })
