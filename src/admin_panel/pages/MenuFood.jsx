@@ -22,14 +22,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import DataTable from "/src/admin_panel/pages/Data_Table.jsx";
+import { FoodTable } from "/src/admin_panel/pages/DataTable.jsx";
+import { Link } from "react-router-dom";
 
 const items = [
-  { title: "Home", url: "#", icon: Home },
-  { title: "Menu", url: "#", icon: Menu },
+  { title: "Home", url: "/admin", icon: Home },
+  { title: "Menu", url: "/admin/menu", icon: Menu },
 ];
 
-export default function AppSidebar() {
+export default function MenuFoods() {
   return (
     <SidebarProvider defaultOpen>
       {/* Sidebar */}
@@ -54,10 +55,10 @@ export default function AppSidebar() {
                 {items.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild>
-                      <a href={item.url}>
+                      <Link to={item.url}>
                         <item.icon />
                         <span>{item.title}</span>
-                      </a>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
@@ -96,12 +97,11 @@ export default function AppSidebar() {
       <SidebarInset>
         <header className="flex h-14 items-center gap-2 border-b px-4">
           <SidebarTrigger />
-          <h1 className="font-semibold">Dashboard</h1>
+          <h1 className="font-semibold">Foods</h1>
         </header>
 
         <main className="p-4">
-          Your page content goes here
-          <DataTable />
+          <FoodTable />
         </main>
       </SidebarInset>
     </SidebarProvider>
